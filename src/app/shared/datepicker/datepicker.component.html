@@ -1,0 +1,39 @@
+<div class="calendar-container success">
+  <input type="hidden"
+         [(ngModel)]="viewDate">
+  <div class="calendar-input"
+       [class.opened]="opened || expanded"
+       (click)="toggle()">
+    <span [class.opened]="opened || expanded">{{ viewDate }}</span>
+    <i class="ion-ios-calendar-outline"></i>
+  </div>
+  <div class="calendar-cal-container"
+       [class.opened]="opened">
+    <div class="calendar-cal-top">
+      <i class="arrow-left"
+         (click)="prevMonth()"></i>
+      <span>{{ date.format('MMMM YYYY') }}</span>
+      <i class="arrow-right"
+         (click)="nextMonth()"></i>
+    </div>
+    <div class="calendar-day-names">
+      <span>Mon</span>
+      <span>Tue</span>
+      <span>Wed</span>
+      <span>Thu</span>
+      <span>Fri</span>
+      <span>Sat</span>
+      <span>Sun</span>
+    </div>
+    <div class="calendar-days">
+      <span *ngFor="let d of days; let i = index;"
+            (click)="selectDate($event, i)"
+            [class.today]="d.today"
+            [class.is-active]="d.selected"
+            [class.hoverable]="d.day"
+            [class.invalid]="!d.day">
+        {{ d.day }}
+      </span>
+    </div>
+  </div>
+</div>

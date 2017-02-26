@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="26px" height="23px" viewBox="0 0 26 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <title>Route</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M21,19 C19.8945,19 18.9375,19.6075 18.417,20.5 L5.25,20.5 C4.0095,20.5 3,19.4905 3,18.25 C3,17.0095 4.0095,16 5.25,16 L18.75,16 C21.645,16 24,13.645 24,10.75 C24,7.855 21.645,5.5 18.75,5.5 L5.583,5.5 C5.0625,4.6075 4.1055,4 3,4 C1.3455,4 0,5.3455 0,7 C0,8.6545 1.3455,10 3,10 C4.1055,10 5.0625,9.3925 5.583,8.5 L18.75,8.5 C19.9905,8.5 21,9.5095 21,10.75 C21,11.9905 19.9905,13 18.75,13 L5.25,13 C2.355,13 0,15.355 0,18.25 C0,21.145 2.355,23.5 5.25,23.5 L18.417,23.5 C18.9375,24.3925 19.8945,25 21,25 C22.6545,25 24,23.6545 24,22 C24,20.3455 22.6545,19 21,19 L21,19 Z" id="path-1"></path>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.12 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Flight-routing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2.1" transform="translate(-15.000000, -16.000000)">
+            <g id="Group-2" transform="translate(16.000000, 12.000000)">
+                <g id="Route">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

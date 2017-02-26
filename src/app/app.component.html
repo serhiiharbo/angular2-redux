@@ -1,0 +1,28 @@
+<nav md-tab-nav-bar>
+    <a md-tab-link id="index"
+       routerLinkActive="active"
+       [routerLink]=" ['./patient-info'] "
+       [routerLinkActiveOptions]="{exact: true}">
+        Patient info
+    </a>
+    <a md-tab-link
+       routerLinkActive="active"
+       [routerLink]=" ['./clinical-info'] "
+       [routerLinkActiveOptions]="{exact: true}">
+        Clinical info
+    </a>
+    <a md-tab-link
+       routerLinkActive="active"
+       [routerLink]=" ['./about'] "
+       [routerLinkActiveOptions]="{exact: true}">
+        About
+    </a>
+</nav>
+
+<main>
+    <router-outlet></router-outlet>
+</main>
+
+<!--<pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>-->
+
+<md-footer></md-footer>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="19px" viewBox="0 0 20 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_local_airport_black_24px</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Flight-routing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2.5" transform="translate(-809.000000, -522.000000)">
+            <g id="Group-3" transform="translate(618.000000, 480.000000)">
+                <g id="ic_local_airport_black_24px" transform="translate(201.000000, 52.000000) rotate(90.000000) translate(-201.000000, -52.000000) translate(189.000000, 40.000000)">
+                    <path d="M21,16 L21,14 L13,9 L13,3.5 C13,2.67 12.33,2 11.5,2 C10.67,2 10,2.67 10,3.5 L10,9 L2,14 L2,16 L10,13.5 L10,19 L8,20.5 L8,22 L11.5,21 L15,22 L15,20.5 L13,19 L13,13.5 L21,16 L21,16 Z" id="Shape" fill-opacity="0.4" fill="#000000"></path>
+                    <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

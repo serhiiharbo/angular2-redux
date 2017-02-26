@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <title>airplane-flight</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M20.5747041,3.21453039 C20.4120587,3.28959349 20.2619245,3.39217974 20.1343103,3.51978703 L15.9956095,7.6607685 L1.74286455,5.95183174 C1.48513408,5.92180649 1.22490138,6.00938012 1.04223804,6.19453579 L0.249028746,6.98770263 C-0.171347158,7.40805604 -0.0412308072,8.11865346 0.501754735,8.36135751 L10.7158883,12.9402071 L7.78326593,15.8726726 L2.66118572,15.8726726 C2.43598434,15.8726726 2.22079191,15.9627483 2.06064871,16.1203558 L1.6327661,16.5507176 C1.20738572,16.9760752 1.34751102,17.694179 1.89800327,17.9294017 L6.21936748,19.7809584 L8.07102324,24.1020663 C8.30623357,24.6525291 9.02687798,24.7926719 9.44978114,24.3673143 L9.88014097,23.9369525 C10.0402842,23.7768179 10.1278625,23.5616369 10.1278625,23.3364476 L10.1278625,18.2146415 L13.0604849,15.2821761 L17.6395795,25.4982902 C17.8822966,26.0412216 18.592932,26.171331 19.0132829,25.7510026 L19.8064922,24.9578358 C19.9916578,24.7726801 20.0792361,24.5149634 20.0492092,24.2572468 L18.3376788,10.0052646 L22.4788819,5.86428313 C22.606521,5.73667585 22.7090877,5.58905173 22.7841549,5.4239129 L23.9401886,2.88427773 C24.1829557,2.36131306 23.6424474,1.81835657 23.1144752,2.05855852 L20.5747041,3.21453039 Z" id="path-1"></path>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.12 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Initial-request" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1" transform="translate(-15.000000, -25.000000)">
+            <g id="Group-2" transform="translate(16.000000, 23.000000)">
+                <g id="airplane-flight">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

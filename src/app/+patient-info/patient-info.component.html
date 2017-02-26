@@ -1,0 +1,19 @@
+<div>patient info</div>
+<a class="add-btn" md-fab [routerLink]=" ['./add-patient'] ">
+    <md-icon>add</md-icon>
+</a>
+
+<router-outlet></router-outlet>
+
+<md-list>
+    <div md-subheader>Code</div>
+    <md-list-item *ngFor="let patient of patients">
+        <h4 md-line>{{patient.name}}</h4>
+        <h4 md-line>{{patient.dob | date}}</h4>
+        <p md-line> {{patient.address}} </p>
+        <md-icon md-list-avatar>edit</md-icon>
+        <md-icon md-list-avatar>delete</md-icon>
+    </md-list-item>
+    <md-divider></md-divider>
+</md-list>
+
