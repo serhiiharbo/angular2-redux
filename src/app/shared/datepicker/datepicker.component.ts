@@ -2,171 +2,171 @@ import { Component, ViewContainerRef, forwardRef, OnInit, Input } from '@angular
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as moment_ from 'moment';
 
-const moment: any = (<any>moment_).default || moment_;
+const moment: any = (<any> moment_).default || moment_;
 
 interface CalendarDate {
-  day: number;
-  month: number;
-  year: number;
-  enabled: boolean;
-  today: boolean;
-  selected: boolean;
+    day: number;
+    month: number;
+    year: number;
+    enabled: boolean;
+    today: boolean;
+    selected: boolean;
 }
 
 export const CALENDAR_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => DatePickerComponent),
-  multi: true
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => DatePickerComponent),
+    multi: true
 };
 
 @Component({
-  selector: 'date-picker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss'],
-  providers: [CALENDAR_VALUE_ACCESSOR]
+    selector: 'date-picker',
+    templateUrl: './datepicker.component.html',
+    styleUrls: ['./datepicker.component.scss'],
+    providers: [CALENDAR_VALUE_ACCESSOR]
 })
 
 export class DatePickerComponent implements ControlValueAccessor, OnInit {
-  @Input() expanded: boolean;
-  @Input() opened: boolean;
-  @Input() format: string;
-  @Input() viewFormat: string;
-  @Input() firstWeekdaySunday: boolean;
-  date: any = moment();
-  // onChange: Function;
-  // onTouched: Function;
-  el: Element;
-  viewDate: string = null;
+    @Input() expanded: boolean;
+    @Input() opened: boolean;
+    @Input() format: string;
+    @Input() viewFormat: string;
+    @Input() firstWeekdaySunday: boolean;
+    date: any = moment();
+    // onChange: Function;
+    // onTouched: Function;
+    el: Element;
+    viewDate: string = null;
 
-  days: CalendarDate[] = [];
-  onTouchedCallback: () => void = () => {
-  };
+    days: CalendarDate[] = [];
+    onTouchedCallback: () => void = () => {
+    };
 
-  onChangeCallback: (a?: any) => void = (a: any) => {
-  };
+    onChangeCallback: (a?: any) => void = (a: any) => {
+    };
 
-  constructor(viewContainerRef: ViewContainerRef) {
-    this.el = viewContainerRef.element.nativeElement;
-  }
+    constructor(viewContainerRef: ViewContainerRef) {
+        this.el = viewContainerRef.element.nativeElement;
+    }
 
 
-  get value(): any {
-    return this.viewDate;
-  }
+    get value(): any {
+        return this.viewDate;
+    }
 
-  set value(value: any) {
-    let date = (value instanceof moment) ? value : moment(value, this.format);
-    this.viewDate = date.format(this.viewFormat);
-    this.onChangeCallback(value);
-  }
+    set value(value: any) {
+        let date = (value instanceof moment) ? value : moment(value, this.format);
+        this.viewDate = date.format(this.viewFormat);
+        this.onChangeCallback(value);
+    }
 
-  ngOnInit() {
-    this.opened = this.opened || false;
-    this.format = this.format || 'MM/DD/YYYY';
-    this.viewFormat = this.viewFormat || 'MM/DD/YYYY';
-    this.firstWeekdaySunday = this.firstWeekdaySunday || false;
-    setTimeout(() => {
-      if (!this.viewDate) {
-        let value = moment();
-        this.value = value;
-        this.onChangeCallback(value.format(this.format));
-      }
-      this.generateCalendar();
-    });
+    ngOnInit() {
+        this.opened = this.opened || false;
+        this.format = this.format || 'MM/DD/YYYY';
+        this.viewFormat = this.viewFormat || 'MM/DD/YYYY';
+        this.firstWeekdaySunday = this.firstWeekdaySunday || false;
+        setTimeout(() => {
+            if (!this.viewDate) {
+                let value = moment();
+                this.value = value;
+                this.onChangeCallback(value.format(this.format));
+            }
+            this.generateCalendar();
+        });
 
-    let body = document.querySelector('body');
-    body.addEventListener('click', e => {
-      if (!this.opened || !e.target) {
-        return;
-      }
-      if (this.el !== e.target && !this.el.contains((<any>e.target))) {
+        let body = document.querySelector('body');
+        body.addEventListener('click', e => {
+            if (!this.opened || !e.target) {
+                return;
+            }
+            if (this.el !== e.target && !this.el.contains((<any> e.target))) {
+                this.close();
+            }
+        }, false);
+    }
+
+    generateCalendar() {
+        let date = moment(this.date);
+        let month = date.month();
+        let year = date.year();
+        let n: number = 1;
+        let firstWeekDay: number = (this.firstWeekdaySunday) ? date.date(2).day() : date.date(1).day();
+
+        if (firstWeekDay !== 1) {
+            n -= (firstWeekDay + 6) % 7;
+        }
+
+        this.days = [];
+        let selectedDate = moment(this.value, this.viewFormat);
+        for (let i = n; i <= date.endOf('month').date(); i += 1) {
+            let currentDate = moment(`${i}.${month + 1}.${year}`, 'DD.MM.YYYY');
+            let today = (moment().isSame(currentDate, 'day') && moment().isSame(currentDate, 'month')) ? true : false;
+            let selected = (selectedDate.isSame(currentDate, 'day')) ? true : false;
+
+            if (i > 0) {
+                this.days.push({
+                    day: i,
+                    month: month + 1,
+                    year: year,
+                    enabled: true,
+                    today: today,
+                    selected: selected
+                });
+            } else {
+                this.days.push({
+                    day: null,
+                    month: null,
+                    year: null,
+                    enabled: false,
+                    today: false,
+                    selected: selected
+                });
+            }
+        }
+    }
+
+    selectDate(e: MouseEvent, i: number) {
+        e.preventDefault();
+
+        let date: CalendarDate = this.days[i];
+        let selectedDate = moment(`${date.day}.${date.month}.${date.year}`, 'DD.MM.YYYY');
+        this.value = selectedDate.format(this.format);
+        this.viewDate = selectedDate.format(this.viewFormat);
         this.close();
-      }
-    }, false);
-  }
-
-  generateCalendar() {
-    let date = moment(this.date);
-    let month = date.month();
-    let year = date.year();
-    let n: number = 1;
-    let firstWeekDay: number = (this.firstWeekdaySunday) ? date.date(2).day() : date.date(1).day();
-
-    if (firstWeekDay !== 1) {
-      n -= (firstWeekDay + 6) % 7;
+        this.generateCalendar();
     }
 
-    this.days = [];
-    let selectedDate = moment(this.value, this.viewFormat);
-    for (let i = n; i <= date.endOf('month').date(); i += 1) {
-      let currentDate = moment(`${i}.${month + 1}.${year}`, 'DD.MM.YYYY');
-      let today = (moment().isSame(currentDate, 'day') && moment().isSame(currentDate, 'month')) ? true : false;
-      let selected = (selectedDate.isSame(currentDate, 'day')) ? true : false;
-
-      if (i > 0) {
-        this.days.push({
-          day: i,
-          month: month + 1,
-          year: year,
-          enabled: true,
-          today: today,
-          selected: selected
-        });
-      } else {
-        this.days.push({
-          day: null,
-          month: null,
-          year: null,
-          enabled: false,
-          today: false,
-          selected: selected
-        });
-      }
+    prevMonth() {
+        this.date = this.date['subtract'](1, 'month');
+        this.generateCalendar();
     }
-  }
 
-  selectDate(e: MouseEvent, i: number) {
-    e.preventDefault();
+    nextMonth() {
+        this.date = this.date.add(1, 'month');
+        this.generateCalendar();
+    }
 
-    let date: CalendarDate = this.days[i];
-    let selectedDate = moment(`${date.day}.${date.month}.${date.year}`, 'DD.MM.YYYY');
-    this.value = selectedDate.format(this.format);
-    this.viewDate = selectedDate.format(this.viewFormat);
-    this.close();
-    this.generateCalendar();
-  }
+    writeValue(value: any) {
+        this.viewDate = value;
+    }
 
-  prevMonth() {
-    this.date = this.date['subtract'](1, 'month');
-    this.generateCalendar();
-  }
+    registerOnChange(fn: any) {
+        this.onChangeCallback = fn;
+    }
 
-  nextMonth() {
-    this.date = this.date.add(1, 'month');
-    this.generateCalendar();
-  }
+    registerOnTouched(fn: any) {
+        this.onTouchedCallback = fn;
+    }
 
-  writeValue(value: any) {
-    this.viewDate = value;
-  }
+    toggle() {
+        this.opened = !this.opened;
+    }
 
-  registerOnChange(fn: any) {
-    this.onChangeCallback = fn;
-  }
+    open() {
+        this.opened = true;
+    }
 
-  registerOnTouched(fn: any) {
-    this.onTouchedCallback = fn;
-  }
-
-  toggle() {
-    this.opened = !this.opened;
-  }
-
-  open() {
-    this.opened = true;
-  }
-
-  close() {
-    this.opened = false;
-  }
+    close() {
+        this.opened = false;
+    }
 }

@@ -7,6 +7,7 @@
   ],
   "rules": {
     // Custom
+    "member-access": false,
     "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
     "interface-name": [false, "always-prefix"],
     // Angular 2
@@ -36,7 +37,7 @@
     ],
     "max-line-length": [
       true,
-      100
+      160
     ],
     "no-string-literal": false,
     "no-use-before-declare": true,

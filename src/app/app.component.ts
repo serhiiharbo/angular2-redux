@@ -1,13 +1,8 @@
-/*
- * Angular 2 decorators and services
- */
-import { Component, OnInit, ViewEncapsulation, Renderer } from '@angular/core';
-import { AppState } from './app.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { select } from '@angular-redux/store';
+import { AppActions } from './app.actions';
+import { Observable } from 'rxjs/Observable';
 
-/*
- * App Component
- * Top Level Component
- */
 @Component({
     selector: 'app',
     encapsulation: ViewEncapsulation.None,
@@ -18,15 +13,20 @@ import { AppState } from './app.service';
 })
 export class AppComponent implements OnInit {
 
-    public angularclassLogo = 'assets/img/angularclass-avatar.png';
-    public name = 'Angular 2 Webpack Starter';
-    public url = 'https://twitter.com/AngularClass';
+    @select() readonly count$: Observable <number>;
+    // @select(state => state.model.assetClass) assetClass: Observable<string>;
 
-    constructor(public appState: AppState, private renderer:Renderer) {
+    constructor(private actions: AppActions,) {
+    }
+
+    increment() {
+        this.actions.increment(Math.random());
+    }
+
+    decrement() {
+        this.actions.decrement('>>>>> payload: decrement');
     }
 
     public ngOnInit() {
-        console.log('Initial App State', this.appState.state);
     }
 }
-

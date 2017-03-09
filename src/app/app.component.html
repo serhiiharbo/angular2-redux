@@ -1,14 +1,12 @@
 <nav md-tab-nav-bar>
     <a md-tab-link id="index"
        routerLinkActive="active"
-       [routerLink]=" ['./patient-info'] "
-       [routerLinkActiveOptions]="{exact: true}">
+       [routerLink]=" ['./patient-info'] ">
         Patient info
     </a>
     <a md-tab-link
        routerLinkActive="active"
-       [routerLink]=" ['./clinical-info'] "
-       [routerLinkActiveOptions]="{exact: true}">
+       [routerLink]=" ['./clinical-info'] ">
         Clinical info
     </a>
     <a md-tab-link
@@ -19,10 +17,13 @@
     </a>
 </nav>
 
+<button (click)="increment()">increment</button>
+<button (click)="decrement()">decrement</button>
+
 <main>
     <router-outlet></router-outlet>
 </main>
 
-<!--<pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>-->
+<pre>{{count$ | async}}</pre>
 
 <md-footer></md-footer>
