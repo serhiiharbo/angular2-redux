@@ -14,7 +14,6 @@ import { Observable } from 'rxjs/Observable';
 export class AppComponent implements OnInit {
 
     @select() readonly count$: Observable <number>;
-    // @select(state => state.model.assetClass) assetClass: Observable<string>;
 
     constructor(private actions: AppActions,) {
     }
@@ -27,6 +26,7 @@ export class AppComponent implements OnInit {
         this.actions.decrement('>>>>> payload: decrement');
     }
 
-    public ngOnInit() {
+    ngOnInit() {
+        this.actions.rehydrate();
     }
 }

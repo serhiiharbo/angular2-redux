@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
-import { IAppState } from './reducers/reducer';
+import { IAppState } from './reducers';
 
 export interface Action {
     type: string;
@@ -9,6 +9,7 @@ export interface Action {
 
 @Injectable()
 export class AppActions {
+    static REHYDRATE = 'REHYDRATE';
     static INCREMENT = 'INCREMENT';
     static DECREMENT = 'DECREMENT';
 
@@ -27,6 +28,10 @@ export class AppActions {
         return {type, payload}
     };
 
+    rehydrate(): Action {
+        return this.ngRedux.dispatch(this.action(AppActions.REHYDRATE));
+    }
+
     increment(payload: any): Action {
         return this.ngRedux.dispatch(this.action(AppActions.INCREMENT, payload));
     }
@@ -35,7 +40,7 @@ export class AppActions {
         return this.ngRedux.dispatch(this.action(AppActions.DECREMENT, payload));
     }
 
-    onAddPatinet(payload: any): Action {
+    onAddPatient(payload: any): Action {
         return this.ngRedux.dispatch(this.action(AppActions.ADD_PATIENT, payload));
     }
 

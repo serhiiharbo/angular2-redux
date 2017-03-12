@@ -5,7 +5,7 @@ import { MaterialModule } from '@angular/material';
 import { NgModule, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
-import { rootReducer, IAppState, INITIAL_STATE } from './reducers/reducer';
+import { rootReducer, IAppState, INITIAL_STATE } from './reducers';
 import { AppActions } from './app.actions';
 import { LocalStorageService } from './shared/services/local-storage.service';
 /*
@@ -51,10 +51,10 @@ const APP_PROVIDERS = [
         AppActions
     ]
 })
-export class AppModule implements OnInit, OnDestroy {
+export class AppModule{
 
-    constructor(devTools: DevToolsExtension,
-                ngRedux: NgRedux <IAppState>,) {
+    constructor(private devTools: DevToolsExtension,
+                private ngRedux: NgRedux <IAppState>,) {
         const storeEnhancers = devTools.isEnabled() ? [devTools.enhancer()] : [];
 
         ngRedux.configureStore(
@@ -62,15 +62,5 @@ export class AppModule implements OnInit, OnDestroy {
             INITIAL_STATE,
             [],
             storeEnhancers);
-    }
-
-    // TODO: action REGIDRATE
-
-    public ngOnInit(): void {
-        // restore state
-    }
-
-    public ngOnDestroy(): void {
-        // save state
     }
 }

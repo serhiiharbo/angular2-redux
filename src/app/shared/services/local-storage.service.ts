@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LocalStorageService {
-    setItem(key, value) {
+    setItem(key: string, value: Object): void {
         localStorage.setItem(key, JSON.stringify(value));
     }
 
-    getItem(key) {
+    getItem(key: string): void {
         return JSON.parse(localStorage.getItem(key));
     }
 }

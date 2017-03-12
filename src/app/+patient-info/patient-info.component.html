@@ -7,7 +7,7 @@
 
 <md-list>
     <div md-subheader>Code</div>
-    <md-list-item *ngFor="let patient of patients">
+    <md-list-item *ngFor="let patient of patients$ | async">
         <h4 md-line>{{patient.name}}</h4>
         <h4 md-line>{{patient.dob | date}}</h4>
         <p md-line> {{patient.address}} </p>

@@ -12,16 +12,16 @@ interface Diagnose {
     isHistory?: boolean;
 }
 
-interface Patient {
+export interface Patient {
     id: number;
     dob: any;
     name: string;
-    address: string;
+    address?: string;
     diagnoses?: Diagnose[];
 }
 
 export interface IAppState {
-    patients?: any[];
+    patients?: Patient[];
     count: number;
 }
 
@@ -30,29 +30,46 @@ export const INITIAL_STATE: IAppState = {
     count: 0
 };
 
-export interface Action { type: string; payload?: any;
+export interface Action {
+    type: string;
+    payload?: any;
 }
 
 export function rootReducer(state: IAppState, action: Action): IAppState {
+    if (action.type === AppActions.REHYDRATE) {
+        console.log('*************', getState());
+        return getState() || state
+    }
+
     if (action.type === AppActions.INCREMENT) {
-        return {count: state.count + 1};
+        return {
+            ...state,
+            count: state.count + 1
+        };
     }
     if (action.type === AppActions.DECREMENT) {
-        return {count: state.count - 1};
+        return {
+            ...state,
+            count: state.count - 1
+        };
     }
     if (action.type === AppActions.ADD_PATIENT) {
         const newPatients = state.patients.slice();
         newPatients.push(action.payload);
+        setState({...state, patients: newPatients});
         return {
             ...state,
             patients: newPatients,
         };
     }
 
-    syncState(state);
     return state;
 }
 
-function syncState(state: IAppState): void {
+function setState(state: IAppState): void {
     localStorageService.setItem('gloriumAppState', state);
+}
+
+function getState(): void {
+    return localStorageService.getItem('gloriumAppState');
 }

@@ -2,8 +2,76 @@
 /* This file is for setting global styles  */
 @import 'reset';
 @import 'variables';
-@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+@import '~@angular/material/core/theming/all-theme';
 
+// Customize angular-material theme
+
+$brand-indigo: (
+        50: #e0ebf3,
+        100: #b3cee1,
+        200: #80adce,
+        300: #4d8cba,
+        400: #2673ab,
+        500: #3DBAFC,
+        600: #005294,
+        700: #00488a,
+        800: #3DBAFC,
+        A200: #6a9bff,
+        A400: #3778ff,
+        A700: #1e67ff,
+        contrast: (
+                500: white,
+                600: white,
+                700: white,
+                800: white,
+                900: white,
+                A700: white,
+        )
+);
+
+$brand-orange: (
+        50: #fef3e4,
+        100: #fde0bb,
+        200: #fccc8e,
+        300: #fab861,
+        400: #f9a83f,
+        500: #f8991d,
+        600: #f7911a,
+        700: #f68615,
+        800: #f57c11,
+        900: #f36b0a,
+        A100: #ffffff,
+        A200: #fff1e9,
+        A400: #ffd1b6,
+        A700: #ffc19c,
+        contrast: (
+                500: white,
+                600: white,
+                700: white,
+                800: white,
+                900: white,
+                A700: white,
+        )
+);
+@include mat-core();
+
+// mandatory stuff for theming
+$primary-palette: mat-palette($brand-indigo);
+$accent-palette:  mat-palette($brand-orange);
+//$ae-warn-palette: mat-palette(red);
+
+// include the custom theme components into a theme object
+$main-theme: mat-light-theme($primary-palette, $accent-palette);
+
+//select primary and secondary colors
+$primary-color: map_get($primary-palette, 500);
+$secondary-color: map_get($accent-palette, 500);
+
+// include the custom theme object into the angular material theme
+@include angular-material-theme($main-theme);
+
+
+// Global styles
 nav {
   background: $theme-color;
 }
@@ -18,4 +86,12 @@ nav a {
   text-align: center;
   text-decoration: none;
   border-radius: 4px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 49%;
 }
