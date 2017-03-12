@@ -22,12 +22,10 @@ export interface Patient {
 
 export interface IAppState {
     patients?: Patient[];
-    count: number;
 }
 
 export const INITIAL_STATE: IAppState = {
-    patients: [],
-    count: 0
+    patients: []
 };
 
 export interface Action {
@@ -37,22 +35,9 @@ export interface Action {
 
 export function rootReducer(state: IAppState, action: Action): IAppState {
     if (action.type === AppActions.REHYDRATE) {
-        console.log('*************', getState());
         return getState() || state
     }
 
-    if (action.type === AppActions.INCREMENT) {
-        return {
-            ...state,
-            count: state.count + 1
-        };
-    }
-    if (action.type === AppActions.DECREMENT) {
-        return {
-            ...state,
-            count: state.count - 1
-        };
-    }
     if (action.type === AppActions.ADD_PATIENT) {
         const newPatients = state.patients.slice();
         newPatients.push(action.payload);

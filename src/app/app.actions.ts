@@ -10,8 +10,6 @@ export interface Action {
 @Injectable()
 export class AppActions {
     static REHYDRATE = 'REHYDRATE';
-    static INCREMENT = 'INCREMENT';
-    static DECREMENT = 'DECREMENT';
 
     static ADD_PATIENT = 'ADD_PATIENT';
     static EDIT_PATIENT = 'EDIT_PATIENT';
@@ -30,14 +28,6 @@ export class AppActions {
 
     rehydrate(): Action {
         return this.ngRedux.dispatch(this.action(AppActions.REHYDRATE));
-    }
-
-    increment(payload: any): Action {
-        return this.ngRedux.dispatch(this.action(AppActions.INCREMENT, payload));
-    }
-
-    decrement(payload: any): Action {
-        return this.ngRedux.dispatch(this.action(AppActions.DECREMENT, payload));
     }
 
     onAddPatient(payload: any): Action {
