@@ -1,16 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { NgRedux } from '@angular-redux/store';
+import { AppActions } from '../../app.actions';
+import { Patient, IAppState } from '../../reducers';
 
 @Component({
     selector: 'edit-patient',
     templateUrl: './edit-patient.component.html',
+    styleUrls: ['./edit-patient.component.scss']
 })
 export class EditPatientComponent implements OnInit {
-    private DOB: any;
+    patient: Patient;
 
-    public ngOnInit() {
+    constructor(protected router: Router,
+                protected actions: AppActions,
+                protected route: ActivatedRoute,
+                protected ngRedux: NgRedux <IAppState>) {
     }
 
+    ngOnInit() {
+        const id: Observable<string> = this.route.fragment;
+        const state = this.ngRedux.getState();
+        id.subscribe(id => this.patient = state.patients.filter(patient => patient.id === +id)[0]);
+    }
+
+    saveEditedPatient() {
+        this.actions.onEditPatient(this.patient);
+        this.router.navigate(['/patient-info']);
+    }
 }
 
 /*

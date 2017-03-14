@@ -2,4 +2,35 @@
   position: fixed;
   right: 20px;
   top: 35px;
+  background: #000;
+}
+
+md-list-item {
+  transition: background ease-out 100ms;
+}
+
+md-list-item:hover {
+  background: rgba(128, 173, 206, 0.2);
+}
+
+h3 {
+  font-size: 15px;
+}
+
+[md-line] {
+  padding-top: 5px !important;
+}
+
+.mat-fab.list-btn {
+  background: #ffffff;
+  color: black;
+  box-shadow: none;
+}
+
+.patient-name {
+  font-size: 15px !important;
+}
+
+.patient-address {
+  color: darkgrey !important;
 }

@@ -7,7 +7,7 @@ import { MaterialModule } from '@angular/material';
 import { routes } from './patient-info.routes';
 import { PatientInfoComponent } from './patient-info.component';
 
-console.log('`Barrel` bundle loaded asynchronously');
+console.log('`Barrel patient` bundle loaded asynchronously');
 
 @NgModule({
     declarations: [

@@ -4,15 +4,19 @@
 
 <router-outlet></router-outlet>
 
-<md-list>
+<md-list dense>
     <div md-subheader>Patients:</div>
-    <md-list-item *ngFor="let patient of patients$ | async">
-        <h4 md-line>{{patient.name}}</h4>
-        <h4 md-line>{{patient.dob | date}}</h4>
-        <p md-line> {{patient.address}} </p>
-        <md-icon md-list-avatar>edit</md-icon>
-        <md-icon md-list-avatar>delete</md-icon>
-    </md-list-item>
     <md-divider></md-divider>
+    <md-list-item *ngFor="let patient of patients$ | async | date">
+        <h3 md-line class="patient-name">{{patient.name}}</h3>
+        <p md-line>{{patient.dob | date}}</p>
+        <p md-line class="patient-address"> {{patient.address}} </p>
+        <a md-fab class="list-btn" [routerLink]=" ['./edit-patient'] " fragment="{{patient.id}}">
+            <md-icon md-list-avatar>edit</md-icon>
+        </a>
+        <button md-fab class="list-btn" (click)="removePatient(patient.id)">
+            <md-icon right md-list-avatar>delete</md-icon>
+        </button>
+    </md-list-item>
 </md-list>
 

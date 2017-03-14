@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppActions } from './app.actions';
+import { AppActions } from '../app.actions';
 import { select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 /*
@@ -18,9 +18,12 @@ console.log('`patient-info` component loaded asynchronously');
 export class PatientInfoComponent implements OnInit {
     @select(state => state.patients) patients$: Observable <any>;
 
+    constructor(protected actions: AppActions){}
 
     public ngOnInit() {
-        console.log('hello `patient-info` component:', this.patients$);
     }
 
+    removePatient(id){
+        this.actions.onRemovePatient({id})
+    }
 }

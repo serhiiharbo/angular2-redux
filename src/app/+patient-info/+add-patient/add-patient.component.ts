@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AppActions } from '../../app.actions';
-import { Patient } from '../../reducers/reducer';
+import { Patient } from '../../reducers';
 
 @Component({
     selector: 'add-patient',
@@ -30,7 +30,6 @@ export class AddPatientComponent implements OnInit {
 
     savePatient() {
         this.patient.id = new Date().getTime();
-        console.log('+++++++++', this.patient);
         this.actions.onAddPatient(this.patient);
         this.router.navigate(['/patient-info']);
     }

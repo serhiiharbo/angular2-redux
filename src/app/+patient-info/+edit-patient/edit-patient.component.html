@@ -1,1 +1,46 @@
-<div>edit-patient</div>
+<form class="patient-form"
+      (ngSubmit)="saveEditedPatient(f.value)" #f="ngForm">
+
+    <div class="top-container">
+        <md-input-container class="half-width">
+            <input mdInput
+                   focused
+                   required
+                   placeholder="Patient Name:"
+                   [(ngModel)] = patient.name
+                   name="name"
+                   #name="ngModel"
+                   id="name"
+                   dividerColor="primary">
+        </md-input-container>
+
+        <md-input-container class="half-width">
+            <input mdInput
+                   required
+                   type="date"
+                   placeholder="DOB:"
+                   name="dob"
+                   #dob="ngModel"
+                   [(ngModel)] = patient.dob>
+        </md-input-container>
+    </div>
+
+    <div class="middle-container">
+        <md-input-container class="full-width">
+            <input mdInput
+                   placeholder="Full Address"
+                   name="address"
+                   #address="ngModel"
+                   [(ngModel)] = patient.address>
+        </md-input-container>
+    </div>
+
+    <div class="bottom-container">
+        <button md-raised-button
+                color="primary"
+                type="submit">
+            SAVE
+        </button>
+        <!--[disabled]="!patient.form.valid"-->
+    </div>
+</form>

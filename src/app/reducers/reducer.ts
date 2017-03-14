@@ -48,6 +48,27 @@ export function rootReducer(state: IAppState, action: Action): IAppState {
         };
     }
 
+    if (action.type === AppActions.EDIT_PATIENT) {
+        const oldPatients = state.patients.slice();
+        const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
+        newPatients.push(action.payload);
+        setState({...state, patients: newPatients});
+        return {
+            ...state,
+            patients: newPatients,
+        };
+    }
+
+    if (action.type === AppActions.REMOVE_PATIENT) {
+        const oldPatients = state.patients.slice();
+        const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
+        setState({...state, patients: newPatients});
+        return {
+            ...state,
+            patients: newPatients,
+        };
+    }
+
     return state;
 }
 

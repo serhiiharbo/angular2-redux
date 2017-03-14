@@ -1,2 +1,2 @@
-export { AddPatientModule } from './add-patient.module';
+export { EditPatientModule } from './edit-patient.module';
 
