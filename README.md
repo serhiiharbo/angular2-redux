@@ -1,4 +1,4 @@
-Angular 2.4.6 + TypeScript 2.1.6 + Webpack 2.2.0 + Redux 3.6.0 + Angular Material 2.0.0 - beta.2
+# Angular 2.4.6 + TypeScript 2.1.6 + Webpack 2.2.0 + Redux 3.6.0 + Angular Material 2.0.0 - beta.2
 
 
 ```bash
