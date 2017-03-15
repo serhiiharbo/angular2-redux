@@ -4,10 +4,14 @@
 
 <router-outlet></router-outlet>
 
-<md-list dense>
+<md-list dense *ngIf="!patients.length">
+    <div md-subheader>No patients.</div>
+</md-list>
+
+<md-list dense *ngIf="patients.length">
     <div md-subheader>Patients:</div>
     <md-divider></md-divider>
-    <md-list-item *ngFor="let patient of patients$ | async | date">
+    <md-list-item *ngFor="let patient of patients$ | async">
         <h3 md-line class="patient-name">{{patient.name}}</h3>
         <p md-line>{{patient.dob | date}}</p>
         <p md-line class="patient-address"> {{patient.address}} </p>

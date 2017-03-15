@@ -1,3 +1,5 @@
+// TODO: add order by ID pipe
+
 import { Component, OnInit } from '@angular/core';
 import { AppActions } from '../app.actions';
 import { select } from '@angular-redux/store';
@@ -16,11 +18,13 @@ console.log('`patient-info` component loaded asynchronously');
     templateUrl: './patient-info.component.html',
 })
 export class PatientInfoComponent implements OnInit {
+    private patients: any[];
     @select(state => state.patients) patients$: Observable <any>;
 
     constructor(protected actions: AppActions){}
 
     public ngOnInit() {
+        this.patients$.subscribe(arr => this.patients = arr);
     }
 
     removePatient(id){
