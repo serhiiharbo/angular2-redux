@@ -1,8 +1,8 @@
+import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { NgModule} from '@angular/core';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { rootReducer, IAppState, INITIAL_STATE } from './reducers';

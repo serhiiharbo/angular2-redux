@@ -2,11 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppActions } from './app.actions';
 
 @Component({
-    selector: 'app',
+    selector: 'md-app',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: [
-        './app.component.css'
-    ],
+    styleUrls: ['./app.component.scss'],
     templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
