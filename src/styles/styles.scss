@@ -57,7 +57,7 @@ $brand-orange: (
 
 // mandatory stuff for theming
 $primary-palette: mat-palette($brand-indigo);
-$accent-palette:  mat-palette($brand-orange);
+$accent-palette: mat-palette($brand-orange);
 //$ae-warn-palette: mat-palette(red);
 
 // include the custom theme components into a theme object
@@ -69,7 +69,6 @@ $secondary-color: map_get($accent-palette, 500);
 
 // include the custom theme object into the angular material theme
 @include angular-material-theme($main-theme);
-
 
 // Global styles
 nav {
@@ -98,4 +97,8 @@ nav a {
 
 .small {
   font-size: 10px;
+}
+
+.mat-list[dense] .mat-list-item .mat-line, .mat-nav-list[dense] .mat-list-item .mat-line {
+  overflow: hidden
 }
