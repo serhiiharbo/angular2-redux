@@ -1,75 +1,64 @@
 // TODO: combineReducers
+import { combineReducers } from 'redux';
+import { composeReducers, defaultFormReducer } from '@angular-redux/form';
+import { routerReducer } from '@angular-redux/router';
+
 // import { combineReducers } from 'redux';
 import { AppActions } from '../app.actions';
 import { LocalStorageService } from '../shared/services/local-storage.service';
+import { IAppState, Action, INITIAL_STATE } from './model.interface';
 
 const localStorageService = new LocalStorageService();
 
-interface Diagnose {
-    code: number;
-    diagnose: string;
-    creationDate: any;
-    isHistory?: boolean;
-}
+// Define the global store shape by combining our application's
+// reducers together into a given structure.
+export const rootReducer = composeReducers(
+    defaultFormReducer(),
+    combineReducers({
+        patients: patientsReducer(),
+        // lions: createAnimalReducer(ANIMAL_TYPES.LION),
+        router: routerReducer,
+    }));
 
-export interface Patient {
-    id: number;
-    dob: any;
-    name: string;
-    address?: string;
-    diagnoses?: Diagnose[];
-}
+export function patientsReducer() {
+    return function  (state: IAppState = INITIAL_STATE, action: Action): IAppState {
+        if (action.type === AppActions.REHYDRATE) {
+            return getState() || state
+        }
 
-export interface IAppState {
-    patients?: Patient[];
-}
+        if (action.type === AppActions.ADD_PATIENT) {
+            const newPatients = state.patients.slice();
+            newPatients.push(action.payload);
+            setState({...state, patients: newPatients});
+            return {
+                ...state,
+                patients: newPatients,
+            };
+        }
 
-export const INITIAL_STATE: IAppState = {
-    patients: []
-};
+        if (action.type === AppActions.EDIT_PATIENT) {
+            const oldPatients = state.patients.slice();
+            const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
+            newPatients.push(action.payload);
+            setState({...state, patients: newPatients});
+            return {
+                ...state,
+                patients: newPatients,
+            };
+        }
 
-export interface Action {
-    type: string;
-    payload?: any;
-}
+        if (action.type === AppActions.REMOVE_PATIENT) {
+            const oldPatients = state.patients.slice();
+            const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
+            setState({...state, patients: newPatients});
+            return {
+                ...state,
+                patients: newPatients,
+            };
+        }
 
-export function rootReducer(state: IAppState, action: Action): IAppState {
-    if (action.type === AppActions.REHYDRATE) {
-        return getState() || state
+        return state;
     }
-
-    if (action.type === AppActions.ADD_PATIENT) {
-        const newPatients = state.patients.slice();
-        newPatients.push(action.payload);
-        setState({...state, patients: newPatients});
-        return {
-            ...state,
-            patients: newPatients,
-        };
-    }
-
-    if (action.type === AppActions.EDIT_PATIENT) {
-        const oldPatients = state.patients.slice();
-        const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
-        newPatients.push(action.payload);
-        setState({...state, patients: newPatients});
-        return {
-            ...state,
-            patients: newPatients,
-        };
-    }
-
-    if (action.type === AppActions.REMOVE_PATIENT) {
-        const oldPatients = state.patients.slice();
-        const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
-        setState({...state, patients: newPatients});
-        return {
-            ...state,
-            patients: newPatients,
-        };
-    }
-
-    return state;
 }
 
 function setState(state: IAppState): void {

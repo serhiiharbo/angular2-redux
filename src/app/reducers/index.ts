@@ -1,5 +1,5 @@
 export * from './reducer';
-
+export * from './model.interface';
 /*
 import { combineReducers } from 'redux';
 import patients from './patients';

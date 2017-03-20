@@ -5,9 +5,11 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
+import { NgReduxRouterModule, NgReduxRouter } from '@angular-redux/router';
 import { rootReducer, IAppState, INITIAL_STATE } from './reducers';
 import { AppActions } from './app.actions';
 import { LocalStorageService } from './shared/services/local-storage.service';
+import { provideReduxForms } from '@angular-redux/form';
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -42,6 +44,7 @@ const APP_PROVIDERS = [
         HttpModule,
         MaterialModule,
         NgReduxModule,
+        NgReduxRouterModule,
         RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules})
     ],
     providers: [ // expose our Services and Providers into Angular's dependency injection
@@ -54,7 +57,8 @@ const APP_PROVIDERS = [
 export class AppModule{
 
     constructor(private devTools: DevToolsExtension,
-                private ngRedux: NgRedux <IAppState>,) {
+                private ngRedux: NgRedux <IAppState>,
+                private ngReduxRouter: NgReduxRouter,) {
         const storeEnhancers = devTools.isEnabled() ? [devTools.enhancer()] : [];
 
         ngRedux.configureStore(
@@ -62,5 +66,11 @@ export class AppModule{
             INITIAL_STATE,
             [],
             storeEnhancers);
+
+        // Enable syncing of Angular router state with our Redux store.
+        ngReduxRouter.initialize();
+
+        // Enable syncing of Angular form state with our Redux store.
+        provideReduxForms(ngRedux);
     }
 }
