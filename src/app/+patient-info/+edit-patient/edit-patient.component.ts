@@ -3,8 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { NgRedux } from '@angular-redux/store';
 import { AppActions } from '../../app.actions';
-import { Patient } from '../../reducers';
-import { IAppState } from '../../reducers/model.interface';
+import { IAppState, Patient } from '../../reducers';
 
 @Component({
     selector: 'edit-patient',
@@ -13,6 +12,7 @@ import { IAppState } from '../../reducers/model.interface';
 })
 export class EditPatientComponent implements OnInit {
     patient: Patient;
+    private patientCurrentData: Patient;
 
     constructor(protected router: Router,
                 protected actions: AppActions,
@@ -23,7 +23,10 @@ export class EditPatientComponent implements OnInit {
     ngOnInit() {
         const id: Observable<string> = this.route.fragment;
         const state = this.ngRedux.getState();
-        id.subscribe(id => this.patient = state.patients.filter(patient => patient.id === +id)[0]);
+        id.subscribe(id => {
+            this.patient = state.patients.filter(patient => patient.id === +id)[0];
+            this.patientCurrentData = {...this.patient};
+        });
     }
 
     saveEditedPatient() {

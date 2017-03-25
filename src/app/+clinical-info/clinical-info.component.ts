@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AppActions } from '../app.actions';
+import { select } from '@angular-redux/store';
+import { Observable } from 'rxjs/Observable';
+
 /*
  * We're loading this component asynchronously
  * We are using some magic with es6-promise-loader that will wrap the module with a Promise
@@ -13,8 +17,12 @@ console.log('`clinical-info` component loaded asynchronously');
     templateUrl: './clinical-info.component.html',
 })
 export class ClinicalInfoComponent implements OnInit {
+    private patients: any[];
+    @select(state => state.patients) patients$: Observable <any>;
+
+    constructor(protected actions: AppActions){}
 
     public ngOnInit() {
-        console.log('hello `clinical-info` component');
+        this.patients$.subscribe(arr => this.patients = arr);
     }
 }

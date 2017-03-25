@@ -49,6 +49,8 @@ export function patientsReducer(key) {
     }
 }
 
+
+// TODO: ls as a provider
 function setState(key:string = '', state: PatientsState): void {
     localStorageService.setItem(`AppState: ${key}`, state);
 }

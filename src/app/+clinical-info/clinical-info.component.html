@@ -1,7 +1,25 @@
-<div>clinical-info.component</div>
-<div>development is in progress...</div>
-
-<a class="add-btn" md-fab [routerLink]=" ['./add-diagnose'] ">
-    <md-icon>add</md-icon>
-</a>
 <router-outlet></router-outlet>
+
+
+<md-list dense *ngIf="!patients.length">
+    <div md-subheader>No patients.</div>
+</md-list>
+
+<md-list dense *ngIf="patients.length">
+    <div md-subheader>Patients:</div>
+    <md-divider></md-divider>
+    <md-list-item *ngFor="let patient of patients$ | async">
+        <h3 md-line class="patient-name">{{patient.name}}</h3>
+        <p md-line>{{patient.dob | date}}</p>
+        <p md-line class="patient-address"> {{patient.address}} </p>
+        <a md-fab class="list-btn" [routerLink]=" ['./add-diagnose'] " fragment="{{patient.id}}">
+        <md-icon md-list-avatar>add</md-icon>
+        </a>
+        <a md-fab class="list-btn" [routerLink]=" ['./edit-diagnose'] " fragment="{{patient.id}}">
+            <md-icon md-list-avatar>edit</md-icon>
+        </a>
+        <button md-fab class="list-btn" (click)="removePatient(patient.id)">
+            <md-icon right md-list-avatar>delete</md-icon>
+        </button>
+    </md-list-item>
+</md-list>
