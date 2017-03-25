@@ -9,7 +9,7 @@ export interface Action {
 
 @Injectable()
 export class AppActions {
-    static GET_PATIENTS = 'GET_PATIENTS';
+    static REHYDRATE = 'REHYDRATE';
 
     static ADD_PATIENT = 'ADD_PATIENT';
     static EDIT_PATIENT = 'EDIT_PATIENT';
@@ -26,8 +26,8 @@ export class AppActions {
         return {type, payload}
     };
 
-    onGetPatients(): Action {
-        return this.ngRedux.dispatch(this.action(AppActions.GET_PATIENTS));
+    rehydrate(): Action {
+        return this.ngRedux.dispatch(this.action(AppActions.REHYDRATE));
     }
 
     onAddPatient(payload: any): Action {

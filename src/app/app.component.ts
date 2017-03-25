@@ -13,6 +13,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        //this.actions.rehydrate();
+        this.actions.rehydrate();
     }
 }

@@ -13,20 +13,20 @@ const localStorageService = new LocalStorageService();
 export const rootReducer = composeReducers(
     defaultFormReducer(),
     combineReducers({
-        patients: patientsReducer(),
+        patients: patientsReducer('patients'),
         router: routerReducer,
     }));
 
-export function patientsReducer() {
+export function patientsReducer(key) {
     return function  (patientsState: PatientsState = INITIAL_PATIENTS_STATE, action: Action): PatientsState {
-        if (action.type === AppActions.GET_PATIENTS) {
-            return getState() || patientsState
+        if (action.type === AppActions.REHYDRATE) {
+            return getState(key) || patientsState
         }
 
         if (action.type === AppActions.ADD_PATIENT) {
             const newPatients = patientsState.slice();
             newPatients.push(action.payload);
-            setState(newPatients);
+            setState(key, newPatients);
             return newPatients;
         }
 
@@ -34,14 +34,14 @@ export function patientsReducer() {
             const oldPatients = patientsState.slice();
             const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
             newPatients.push(action.payload);
-            setState(newPatients);
+            setState(key, newPatients);
             return newPatients;
         }
 
         if (action.type === AppActions.REMOVE_PATIENT) {
             const oldPatients = patientsState.slice();
             const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
-            setState(newPatients);
+            setState(key, newPatients);
             return newPatients;
         }
 
@@ -49,10 +49,10 @@ export function patientsReducer() {
     }
 }
 
-function setState(state: PatientsState): void {
-    localStorageService.setItem('gloriumAppState: patients', state);
+function setState(key:string = '', state: PatientsState): void {
+    localStorageService.setItem(`AppState: ${key}`, state);
 }
 
-function getState() {
-    return localStorageService.getItem('gloriumAppState: patients');
+function getState(key): any {
+    return localStorageService.getItem(`AppState: ${key}`);
 }
