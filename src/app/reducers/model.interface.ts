@@ -1,6 +1,3 @@
-/**
- * Created by aquile_bernadotte on 3/20/17.
- */
 export interface Diagnose {
     code: number;
     diagnose: string;
@@ -16,9 +13,14 @@ export interface Patient {
     diagnoses?: Diagnose[];
 }
 
+export interface PatientsState extends Array<Patient>{}
+
 export interface IAppState {
-    patients?: Patient[];
+    patients: Patient[];
+    router?: any
 }
+
+export const INITIAL_PATIENTS_STATE: PatientsState = [];
 
 export const INITIAL_STATE: IAppState = {
     patients: []

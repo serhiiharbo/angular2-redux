@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
-import { IAppState } from './reducers';
+import { PatientsState } from './reducers';
 
 export interface Action {
     type: string;
@@ -9,7 +9,7 @@ export interface Action {
 
 @Injectable()
 export class AppActions {
-    static REHYDRATE = 'REHYDRATE';
+    static GET_PATIENTS = 'GET_PATIENTS';
 
     static ADD_PATIENT = 'ADD_PATIENT';
     static EDIT_PATIENT = 'EDIT_PATIENT';
@@ -19,15 +19,15 @@ export class AppActions {
     static EDIT_DIAGNOSE = 'EDIT_DIAGNOSE';
     static REMOVE_DIAGNOSE = 'REMOVE_DIAGNOSE';
 
-    constructor(private ngRedux: NgRedux <IAppState>,) {
+    constructor(private ngRedux: NgRedux <PatientsState>,) {
     }
 
     action(type: string, payload: any = {}) {
         return {type, payload}
     };
 
-    rehydrate(): Action {
-        return this.ngRedux.dispatch(this.action(AppActions.REHYDRATE));
+    onGetPatients(): Action {
+        return this.ngRedux.dispatch(this.action(AppActions.GET_PATIENTS));
     }
 
     onAddPatient(payload: any): Action {

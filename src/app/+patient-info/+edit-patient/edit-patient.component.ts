@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { NgRedux } from '@angular-redux/store';
 import { AppActions } from '../../app.actions';
-import { Patient, IAppState } from '../../reducers';
+import { Patient, PatientsState } from '../../reducers';
+import { IAppState } from '../../reducers/model.interface';
 
 @Component({
     selector: 'edit-patient',

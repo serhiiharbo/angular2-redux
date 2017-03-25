@@ -24,6 +24,7 @@ export class PatientInfoComponent implements OnInit {
     constructor(protected actions: AppActions){}
 
     public ngOnInit() {
+        this.actions.onGetPatients();
         this.patients$.subscribe(arr => this.patients = arr);
     }
 
