@@ -1,25 +1,89 @@
 <router-outlet></router-outlet>
 
-
 <md-list dense *ngIf="!patients.length">
     <div md-subheader>No patients.</div>
 </md-list>
 
-<md-list dense *ngIf="patients.length">
-    <div md-subheader>Patients:</div>
-    <md-divider></md-divider>
-    <md-list-item *ngFor="let patient of patients$ | async">
-        <h3 md-line class="patient-name">{{patient.name}}</h3>
-        <p md-line>{{patient.dob | date}}</p>
-        <p md-line class="patient-address"> {{patient.address}} </p>
-        <a md-fab class="list-btn" [routerLink]=" ['./add-diagnose'] " fragment="{{patient.id}}">
-        <md-icon md-list-avatar>add</md-icon>
-        </a>
-        <a md-fab class="list-btn" [routerLink]=" ['./edit-diagnose'] " fragment="{{patient.id}}">
-            <md-icon md-list-avatar>edit</md-icon>
-        </a>
-        <button md-fab class="list-btn" (click)="removePatient(patient.id)">
-            <md-icon right md-list-avatar>delete</md-icon>
-        </button>
-    </md-list-item>
-</md-list>
+
+<md-sidenav-container class="sidenav-fab-container"
+                      *ngIf="patients.length">
+    <div class="scrolling-content">
+        <md-list dense>
+            <div md-subheader>Patients:</div>
+            <md-divider></md-divider>
+            <md-list-item *ngFor="let patient of patients$ | async"
+                          [ngClass]="{'active': patient.id === id}">
+                <h3 md-line class="patient-name">{{patient.name}}</h3>
+                <p md-line>{{patient.dob | date}}</p>
+                <p md-line class="patient-address"> {{patient.address}} </p>
+
+                <button md-fab
+                        class="list-btn blue"
+                        (click)="toogleSidenav(patient.id)">
+                    <md-icon>dehaze</md-icon>
+                </button>
+                <a md-fab
+                   class="list-btn blue"
+                   [routerLink]=" ['./add-diagnose'] "
+                   fragment="{{patient.id}}">
+                    <md-icon md-list-avatar>add</md-icon>
+                </a>
+            </md-list-item>
+        </md-list>
+    </div>
+
+    <md-sidenav #sidenav
+                mode="over"
+                opened="false"
+                (open-start)="openSideBar()"
+                align="end">
+        <div class="scrolling-content">
+            <md-list dense>
+                <div md-subheader>Diagnoses:</div>
+                <md-divider></md-divider>
+                <div md-subheader *ngIf="!diagnoses.length">No active diagnoses.</div>
+                <md-list-item *ngFor="let diagnose of diagnoses">
+                    <h3 md-line class="diagnose-info">
+                        Code: {{diagnose.code}}
+                    </h3>
+                    <p md-line class="diagnose-info">
+                        Creation date: {{diagnose.creationDate}}
+                    </p>
+                    <p md-line class="diagnose-main">
+                        Diagnose:
+                        <br>
+                        {{diagnose.diagnose}}
+                    </p>
+
+                    <!--<a md-fab-->
+                       <!--class="list-btn"-->
+                       <!--[routerLink]=" ['./edit-diagnose'] "-->
+                       <!--fragment="{{diagnose.id}}">-->
+                        <!--<md-icon md-list-avatar>edit</md-icon>-->
+                    <!--</a>-->
+                    <button md-fab class="list-btn" (click)="removeDiagnose(diagnose.id)">
+                        <md-icon right md-list-avatar>delete</md-icon>
+                    </button>
+
+                </md-list-item>
+            </md-list>
+            <md-list dense
+                     id="history"
+                     *ngIf="deletedDiagnoses.length">
+                <div md-subheader>History:</div>
+                <md-divider></md-divider>
+                <md-list-item *ngFor="let diagnose of deletedDiagnoses">
+                    <h3 md-line class="diagnose-code">
+                        Code: {{diagnose.code}}
+                    </h3>
+                    <p md-line class="diagnose-diagnose">
+                        Diagnose:
+                        <br>
+                        {{diagnose.diagnose}}
+                    </p>
+                </md-list-item>
+            </md-list>
+        </div>
+    </md-sidenav>
+</md-sidenav-container>
+

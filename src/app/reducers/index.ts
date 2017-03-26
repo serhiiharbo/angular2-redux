@@ -1,4 +1,4 @@
-export * from './reducer';
+export * from './combine.reducer';
 export * from './model.interface';
 /*
 import { combineReducers } from 'redux';

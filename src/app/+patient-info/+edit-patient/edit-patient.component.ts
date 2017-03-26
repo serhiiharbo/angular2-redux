@@ -30,6 +30,7 @@ export class EditPatientComponent implements OnInit {
     }
 
     saveEditedPatient() {
+        this.patient.edited = new Date().getTime();
         this.actions.onEditPatient(this.patient);
         this.router.navigate(['/patient-info']);
     }

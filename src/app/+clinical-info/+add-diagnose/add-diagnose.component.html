@@ -1,4 +1,62 @@
-<div>
-    add-diagnose.component
-</div>
-<div>development is in progress...</div>
+<md-sidenav-container class="example-sidenav-fab-container">
+    <md-sidenav #sidenav mode="side" opened="true">
+
+        <div class="example-scrolling-content">
+            <md-card class="example-card">
+                <md-card-header>
+                    <div md-card-avatar class="example-header-image"></div>
+                    <md-card-title>{{patientCurrentData.name}}</md-card-title>
+                    <md-card-subtitle>{{patientCurrentData.dob}}</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="../../../assets/img/cat-person.jpg">
+                <md-card-content *ngIf="patientCurrentData.address">
+                    <md-card-subtitle>Address: {{patientCurrentData.address}}</md-card-subtitle>
+                    <md-card-subtitle>Last modified:</md-card-subtitle>
+                    <md-card-subtitle>{{patientCurrentData.id | date}}</md-card-subtitle>
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-sidenav>
+    <div class="example-scrolling-content">
+        <form class="add-diagnose-form"
+              (ngSubmit)="addDiagnose(f.value)" #f="ngForm">
+
+            <h2>Add diagnose form</h2>
+            <div class="top-container">
+                <md-input-container class="half-width">
+                    <input mdInput
+                           focused
+                           required
+                           placeholder="Code:"
+                           [(ngModel)]=diagnose.code
+                           name="code"
+                           #code="ngModel"
+                           id="code"
+                           dividerColor="primary">
+                </md-input-container>
+            </div>
+
+            <div class="middle-container">
+                <md-input-container class="full-width">
+                    <input mdInput
+                           required
+                           placeholder="Diagnose:"
+                           name="diagnose"
+                           #diagnose="ngModel"
+                           id="diagnose"
+                           [(ngModel)]=diagnose.diagnose>
+                </md-input-container>
+            </div>
+
+            <div class="bottom-container">
+                <button md-raised-button
+                        color="primary"
+                        type="submit">
+                    SAVE
+                </button>
+                <!--[disabled]="!patient.form.valid"-->
+            </div>
+        </form>
+    </div>
+</md-sidenav-container>
+

@@ -8,6 +8,7 @@
 
 <form class="patient-form"
       (ngSubmit)="savePatient(f.value)" #f="ngForm">
+    <h2>Add new patient form</h2>
 
     <div class="top-container">
         <md-input-container class="half-width">
@@ -36,7 +37,7 @@
     <div class="middle-container">
         <md-input-container class="full-width">
             <input mdInput
-                   placeholder="Full Address"
+                   placeholder="Full Address:"
                    name="address"
                    #address="ngModel"
                    [(ngModel)] = patient.address>

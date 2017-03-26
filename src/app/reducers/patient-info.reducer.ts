@@ -1,37 +1,24 @@
-import { combineReducers } from 'redux';
-import { composeReducers, defaultFormReducer } from '@angular-redux/form';
-import { routerReducer } from '@angular-redux/router';
-
 import { AppActions } from '../app.actions';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { PatientsState, Action, INITIAL_PATIENTS_STATE } from './model.interface';
 
 const localStorageService = new LocalStorageService();
 
-// Define the global store shape by combining our application's
-// reducers together into a given structure.
-export const rootReducer = composeReducers(
-    defaultFormReducer(),
-    combineReducers({
-        patients: patientsReducer('patients'),
-        router: routerReducer,
-    }));
-
 export function patientsReducer(key) {
-    return function  (patientsState: PatientsState = INITIAL_PATIENTS_STATE, action: Action): PatientsState {
+    return function  (state: PatientsState = INITIAL_PATIENTS_STATE, action: Action): PatientsState {
         if (action.type === AppActions.REHYDRATE) {
-            return getState(key) || patientsState
+            return getState(key) || state
         }
 
         if (action.type === AppActions.ADD_PATIENT) {
-            const newPatients = patientsState.slice();
+            const newPatients = state.slice();
             newPatients.push(action.payload);
             setState(key, newPatients);
             return newPatients;
         }
 
         if (action.type === AppActions.EDIT_PATIENT) {
-            const oldPatients = patientsState.slice();
+            const oldPatients = state.slice();
             const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
             newPatients.push(action.payload);
             setState(key, newPatients);
@@ -39,16 +26,15 @@ export function patientsReducer(key) {
         }
 
         if (action.type === AppActions.REMOVE_PATIENT) {
-            const oldPatients = patientsState.slice();
+            const oldPatients = state.slice();
             const newPatients = oldPatients.filter(patient => patient.id !== action.payload.id);
             setState(key, newPatients);
             return newPatients;
         }
 
-        return patientsState;
+        return state;
     }
 }
-
 
 // TODO: ls as a provider
 function setState(key:string = '', state: PatientsState): void {

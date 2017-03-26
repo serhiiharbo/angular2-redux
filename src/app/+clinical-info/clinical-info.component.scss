@@ -1,5 +1,69 @@
-.add-btn {
-  position: fixed;
-  right: 20px;
-  top: 35px;
+.sidenav-fab-container {
+  width: 100%;
+  height: calc(100vh - 74px);
+}
+
+.sidenav-fab-container md-sidenav {
+  width: 600px;
+}
+
+.sidenav-fab-container .mat-sidenav-content,
+.sidenav-fab-container md-sidenav {
+  display: flex;
+  overflow: visible;
+}
+
+.scrolling-content {
+  width: 100%;
+  overflow: auto;
+}
+
+md-list-item {
+  transition: background ease-out 100ms;
+}
+
+md-list-item:hover,
+md-list-item.active {
+  background: rgba(128, 173, 206, 0.2);
+}
+
+h3 {
+  font-size: 15px;
+}
+
+[md-line] {
+  padding-top: 5px !important;
+}
+
+.mat-fab.list-btn {
+  background: #ffffff;
+  color: red;
+  box-shadow: none;
+  &.blue {
+    color: #1e67ff;
+  }
+}
+
+.diagnose-info {
+  color: darkgrey;
+  font-size: 12px !important;
+}
+
+.diagnose-main {
+  font-size: 15px;
+}
+
+#history {
+  background: rgba(0, 0, 0, 0.1);
+  .diagnose-code {
+    color: darkgrey;
+    font-size: 12px !important;
+  }
+
+  .diagnose-diagnose {
+    color: darkgrey !important;
+  }
+  md-list-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
 }

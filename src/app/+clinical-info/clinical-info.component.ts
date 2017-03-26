@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppActions } from '../app.actions';
 import { select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
+import { MdSidenav } from '@angular/material';
+import { PatientsState, ClinicalInfoState, Diagnose } from '../reducers';
 
 /*
  * We're loading this component asynchronously
@@ -12,17 +14,47 @@ import { Observable } from 'rxjs/Observable';
 console.log('`clinical-info` component loaded asynchronously');
 
 @Component({
+    inputs: ['openSideBar'],
     selector: 'clinical-info',
     styleUrls: ['clinical-info.component.scss'],
     templateUrl: './clinical-info.component.html',
 })
 export class ClinicalInfoComponent implements OnInit {
-    private patients: any[];
-    @select(state => state.patients) patients$: Observable <any>;
+    // @Input() openSideBar: any;
+    private patients: PatientsState;
+    private clinicalInfo: ClinicalInfoState;
+    private diagnoses: ClinicalInfoState = [];
+    private deletedDiagnoses: ClinicalInfoState = [];
+    private id: number;
 
-    constructor(protected actions: AppActions){}
+    @ViewChild('sidenav') sidenav: MdSidenav;
+    @select(state => state.patients) patients$: Observable <PatientsState>;
+    @select(state => state.diagnoses) diagnoses$: Observable <ClinicalInfoState>;
 
-    public ngOnInit() {
-        this.patients$.subscribe(arr => this.patients = arr);
+    constructor(protected actions: AppActions) {
+    }
+
+    public ngOnInit(): void {
+        this.patients$.subscribe(patients => this.patients = patients);
+        this.diagnoses$.subscribe(info => this.clinicalInfo = info);
+    }
+
+    toogleSidenav(id: number): void {
+        this.diagnoses = this.deletedDiagnoses = [];
+        this.id = id;
+        this.sidenav.toggle();
+    }
+
+    openSideBar(): void {
+        this.diagnoses = this.clinicalInfo.filter(d => d.patientId === this.id && !d.deleted);
+        this.deletedDiagnoses = this.clinicalInfo.filter(d => d.patientId === this.id && d.deleted);
+    }
+
+    removeDiagnose(id: number): void {
+        this.actions.onRemoveDiagnose({id});
+        this.diagnoses$.subscribe(info => {
+            this.diagnoses = info.filter(d => d.patientId === this.id && !d.deleted);
+            this.deletedDiagnoses = info.filter(d => d.patientId === this.id && d.deleted);
+        });
     }
 }

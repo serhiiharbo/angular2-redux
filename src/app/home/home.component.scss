@@ -2,3 +2,19 @@ h1, div {
   text-align: center;
   color: grey;
 }
+
+img {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+}
+
+.technologies-logos {
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.plus {
+  font-size: 40px;
+}
