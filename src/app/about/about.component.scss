@@ -1,0 +1,22 @@
+h1, div {
+  text-align: center;
+  color: grey;
+  margin: 100px auto;
+}
+
+img {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+}
+
+.technologies-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.plus {
+  font-size: 40px;
+}
