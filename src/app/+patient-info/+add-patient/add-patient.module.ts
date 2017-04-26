@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
-import { DatePickerModule } from '../../shared';
+// import { DatePickerModule } from '../../shared';
 import { routes } from './add-patient.routes';
 import { AddPatientComponent } from './add-patient.component';
 
@@ -16,7 +16,7 @@ import { AddPatientComponent } from './add-patient.component';
     imports: [
         CommonModule,
         FormsModule,
-        DatePickerModule,
+        // DatePickerModule,
         MaterialModule,
         RouterModule.forChild(routes),
     ],

@@ -27,7 +27,7 @@ export class AppActions {
     };
 
     rehydrate(): Action {
-        return this.ngRedux.dispatch(this.action(AppActions.REHYDRATE));
+        return this.ngRedux.dispatch(this.action(AppActions.REHYDRATE)); // Action {type, payload?}
     }
 
     onAddPatient(payload: any): Action {

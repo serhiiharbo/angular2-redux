@@ -6,6 +6,8 @@ const localStorageService = new LocalStorageService();
 
 export function patientsReducer(key) {
     return function  (state: PatientsState = INITIAL_PATIENTS_STATE, action: Action): PatientsState {
+        console.log('state', state);
+        // console.log('action', action);
         if (action.type === AppActions.REHYDRATE) {
             return getState(key) || state
         }

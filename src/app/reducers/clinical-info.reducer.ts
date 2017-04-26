@@ -27,9 +27,7 @@ export function clinicalInfoReducer(key) {
 
         if (action.type === AppActions.REMOVE_DIAGNOSE) {
             const newDiagnoses = state.slice();
-            newDiagnoses.forEach(diagnose => {
-                if (diagnose.id === action.payload.id) diagnose.deleted = true
-            });
+            newDiagnoses.find(diagnose => diagnose.id === action.payload.id).deleted = true;
             setState(key, newDiagnoses);
             return newDiagnoses;
         }

@@ -298,7 +298,6 @@ module.exports = function (env) {
             ],
             customAttrAssign: [/\)?\]?=/]
           },
-
         }
       }),
 
